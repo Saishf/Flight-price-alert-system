@@ -2,18 +2,64 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Initialize and push repo",
+			"label": "Run tracker",
 			"type": "shell",
-			"command": "cmd /c \"cd /d \"\"C:\\Users\\Admin\\Desktop\\Fligght price tracker\"\" && git init && git branch -M main && git config user.name \"Saishf\" && git config user.email \"saishf@example.com\" && git remote add origin https://github.com/Saishf/Flight-price-alert-system.git && git add . && git commit -m \"Initial flight price alert system\" && git push -u origin main\"",
-			"args": [],
+			"command": "python src/main.py",
+			"options": {
+				"cwd": "C:\\Users\\Admin\\Desktop\\Fligght price tracker"
+			},
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "Run tracker (JSON)",
+			"type": "shell",
+			"command": "python src/main.py --json",
+			"options": {
+				"cwd": "C:\\Users\\Admin\\Desktop\\Fligght price tracker"
+			},
 			"isBackground": false,
 			"problemMatcher": [],
 			"group": "build"
 		},
 		{
-			"label": "Git setup and push",
+			"label": "Run tests",
 			"type": "shell",
-			"command": "$repo = 'C:\\Users\\Admin\\Desktop\\Fligght price tracker'; Set-Location $repo; git init; git branch -M main; git config user.name 'Saishf'; git config user.email 'saishf@example.com'; git remote add origin 'https://github.com/Saishf/Flight-price-alert-system.git'; git add .; git commit -m 'Initial flight price alert system'; git push -u origin main",
+			"command": "pytest -q",
+			"options": {
+				"cwd": "C:\\Users\\Admin\\Desktop\\Fligght price tracker"
+			},
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Git: verify branch state",
+			"type": "shell",
+			"command": "git status --short --branch; Write-Host '---'; git log --oneline --decorate --graph -n 8; Write-Host '---'; git branch -vv",
+			"options": {
+				"cwd": "C:\\Users\\Admin\\Desktop\\Fligght price tracker"
+			},
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Check diff after task update",
+			"type": "shell",
+			"command": "$repo = 'C:\\Users\\Admin\\Desktop\\Fligght price tracker'; Set-Location $repo; git status --short --branch; Write-Host '---'; git diff -- .vscode/tasks.json",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Commit task updates to feature branch",
+			"type": "shell",
+			"command": "$repo = 'C:\\Users\\Admin\\Desktop\\Fligght price tracker'; Set-Location $repo; git add .vscode/tasks.json; git commit -m 'Add project VS Code tasks'; git push",
 			"isBackground": false,
 			"problemMatcher": [],
 			"group": "build"
