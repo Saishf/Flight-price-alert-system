@@ -1,0 +1,200 @@
+{
+  "routes": {
+    "BLR-ISK-2026-11-07": {
+      "history": [
+        {
+          "timestamp": "2026-09-11T17:17:31.028384+00:00",
+          "price": 8420,
+          "airline": "IndiGo",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T17:24:26.644335+00:00",
+          "price": 8420,
+          "airline": "IndiGo",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T17:40:49.674368+00:00",
+          "price": 8420,
+          "airline": "IndiGo",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T17:43:10.672009+00:00",
+          "price": 8420,
+          "airline": "IndiGo",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T17:44:36.852793+00:00",
+          "price": 8420,
+          "airline": "IndiGo",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T17:52:02.708304+00:00",
+          "price": 8420,
+          "airline": "IndiGo",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T17:59:31.819014+00:00",
+          "price": 7835,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 1,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T18:02:27.281684+00:00",
+          "price": 7835,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 1,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T18:02:53.718529+00:00",
+          "price": 7835,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 1,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T18:11:59.173902+00:00",
+          "price": 7835,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 1,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T18:21:20.574145+00:00",
+          "price": 7835,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 1,
+          "route": "BLR -> ISK"
+        },
+        {
+          "timestamp": "2026-09-11T18:34:33.721800+00:00",
+          "price": 7835,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 1,
+          "route": "BLR -> ISK"
+        }
+      ],
+      "lowest_price": 7835,
+      "latest_price": 7835
+    },
+    "BLR-SAG-2026-11-07": {
+      "history": [
+        {
+          "timestamp": "2026-09-11T17:17:31.043772+00:00",
+          "price": 7820,
+          "airline": "Air India Express",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T17:40:49.687984+00:00",
+          "price": 7820,
+          "airline": "Air India Express",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T17:43:10.686750+00:00",
+          "price": 7820,
+          "airline": "Air India Express",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T17:44:36.861690+00:00",
+          "price": 7820,
+          "airline": "Air India Express",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T17:52:02.726047+00:00",
+          "price": 7820,
+          "airline": "Air India Express",
+          "source": "demo",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T17:59:33.732797+00:00",
+          "price": 6859,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T18:02:27.443634+00:00",
+          "price": 6859,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T18:02:53.812808+00:00",
+          "price": 6859,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T18:11:59.498313+00:00",
+          "price": 6859,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T18:21:25.929428+00:00",
+          "price": 6859,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        },
+        {
+          "timestamp": "2026-09-11T18:34:38.666914+00:00",
+          "price": 6859,
+          "airline": "IndiGo",
+          "source": "serpapi_google_flights",
+          "stops": 0,
+          "route": "BLR -> SAG"
+        }
+      ],
+      "lowest_price": 6859,
+      "latest_price": 6859
+    }
+  }
+}

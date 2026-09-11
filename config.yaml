@@ -1,0 +1,18 @@
+routes:
+  - origin: BLR
+    destination: ISK
+    date: 2026-11-07
+    target_price: 9000
+    label: BLR -> ISK
+
+  - origin: BLR
+    destination: SAG
+    date: 2026-11-07
+    target_price: 9000
+    label: BLR -> SAG
+
+settings:
+  schedule_hours: 8
+  max_api_calls_per_day: 6
+  ignore_bank_offers: true
+  compare_actual_displayed_fare: true

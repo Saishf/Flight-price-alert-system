@@ -1,0 +1,22 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Initialize and push repo",
+			"type": "shell",
+			"command": "cmd /c \"cd /d \"\"C:\\Users\\Admin\\Desktop\\Fligght price tracker\"\" && git init && git branch -M main && git config user.name \"Saishf\" && git config user.email \"saishf@example.com\" && git remote add origin https://github.com/Saishf/Flight-price-alert-system.git && git add . && git commit -m \"Initial flight price alert system\" && git push -u origin main\"",
+			"args": [],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Git setup and push",
+			"type": "shell",
+			"command": "$repo = 'C:\\Users\\Admin\\Desktop\\Fligght price tracker'; Set-Location $repo; git init; git branch -M main; git config user.name 'Saishf'; git config user.email 'saishf@example.com'; git remote add origin 'https://github.com/Saishf/Flight-price-alert-system.git'; git add .; git commit -m 'Initial flight price alert system'; git push -u origin main",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		}
+	]
+}
