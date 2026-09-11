@@ -41,7 +41,9 @@ class TripProvider:
         text = str(value or "")
         hours = re.search(r"(\d+)\s*h", text, re.IGNORECASE)
         minutes = re.search(r"(\d+)\s*m", text, re.IGNORECASE)
-        return (int(hours.group(1)) * 60 if hours else 0) + (int(minutes.group(1)) if minutes else 0)
+        return (int(hours.group(1)) * 60 if hours else 0) + (
+            int(minutes.group(1)) if minutes else 0
+        )
 
     @staticmethod
     def _parse_price(value: Any) -> int | None:
@@ -98,7 +100,9 @@ class TripProvider:
                 return lowered[key.lower()]
         return None
 
-    def _offer_from_record(self, record: dict[str, Any], route: RouteConfig, url: str) -> FlightOffer | None:
+    def _offer_from_record(
+        self, record: dict[str, Any], route: RouteConfig, url: str
+    ) -> FlightOffer | None:
         record_text = json.dumps(record, ensure_ascii=False, default=str)
         if route.origin not in record_text or route.destination not in record_text:
             return None
@@ -122,18 +126,44 @@ class TripProvider:
         if price is None:
             return None
 
-        airline = self._value_from_keys(record, ("airlineName", "airline", "carrierName", "marketingCarrierName")) or "Unknown"
-        flight_number = self._value_from_keys(record, ("flightNo", "flightNumber", "flightNumbers", "flightNoList"))
-        departure = self._value_from_keys(record, ("departureTime", "departTime", "dTime", "departDateTime")) or ""
-        arrival = self._value_from_keys(record, ("arrivalTime", "arriveTime", "aTime", "arriveDateTime")) or ""
+        airline = (
+            self._value_from_keys(
+                record,
+                ("airlineName", "airline", "carrierName", "marketingCarrierName"),
+            )
+            or "Unknown"
+        )
+        flight_number = self._value_from_keys(
+            record, ("flightNo", "flightNumber", "flightNumbers", "flightNoList")
+        )
+        departure = (
+            self._value_from_keys(
+                record, ("departureTime", "departTime", "dTime", "departDateTime")
+            )
+            or ""
+        )
+        arrival = (
+            self._value_from_keys(
+                record, ("arrivalTime", "arriveTime", "aTime", "arriveDateTime")
+            )
+            or ""
+        )
         stops = self._value_from_keys(record, ("stopCount", "stops", "transferCount"))
-        duration = self._value_from_keys(record, ("duration", "durationMinutes", "durationTime"))
-        baggage = self._value_from_keys(record, ("baggage", "baggageText", "baggageAllowance"))
+        duration = self._value_from_keys(
+            record, ("duration", "durationMinutes", "durationTime")
+        )
+        baggage = self._value_from_keys(
+            record, ("baggage", "baggageText", "baggageAllowance")
+        )
 
         try:
             stop_count = int(stops or 0)
         except (TypeError, ValueError):
-            stop_count = 0 if "nonstop" in record_text.lower() or "direct" in record_text.lower() else 1
+            stop_count = (
+                0
+                if "nonstop" in record_text.lower() or "direct" in record_text.lower()
+                else 1
+            )
 
         if isinstance(flight_number, list):
             flight_numbers = [str(item) for item in flight_number]
@@ -162,7 +192,9 @@ class TripProvider:
             raw=record,
         )
 
-    def _parse_network_payloads(self, payloads: list[str], route: RouteConfig, url: str) -> list[FlightOffer]:
+    def _parse_network_payloads(
+        self, payloads: list[str], route: RouteConfig, url: str
+    ) -> list[FlightOffer]:
         offers_by_key: dict[tuple[int, str, str], FlightOffer] = {}
         for payload in payloads:
             for candidate in self._load_json_candidates(payload):
@@ -171,12 +203,18 @@ class TripProvider:
                     if offer:
                         key = (offer.price, offer.departure, offer.arrival)
                         offers_by_key[key] = offer
-        return sorted(offers_by_key.values(), key=lambda item: (item.price, item.stops, item.duration_minutes))
+        return sorted(
+            offers_by_key.values(),
+            key=lambda item: (item.price, item.stops, item.duration_minutes),
+        )
 
     def _save_debug(self, page: Any, route: RouteConfig, reason: str) -> None:
         self.debug_dir.mkdir(parents=True, exist_ok=True)
         stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        base = self.debug_dir / f"trip-{route.origin}-{route.destination}-{route.date}-{stamp}"
+        base = (
+            self.debug_dir
+            / f"trip-{route.origin}-{route.destination}-{route.date}-{stamp}"
+        )
         try:
             page.screenshot(path=str(base.with_suffix(".png")), full_page=True)
         except Exception:
@@ -210,7 +248,10 @@ class TripProvider:
 
             def capture_response(response: Any) -> None:
                 response_url = response.url.lower()
-                if "flightlistsearch" not in response_url and "flightsearch" not in response_url:
+                if (
+                    "flightlistsearch" not in response_url
+                    and "flightsearch" not in response_url
+                ):
                     return
                 try:
                     payloads.append(response.text())
@@ -229,11 +270,15 @@ class TripProvider:
                 blocked_reason = self._blocked_reason(page)
                 if blocked_reason:
                     self._save_debug(page, route, blocked_reason)
-                    print(f"Trip.com provider unavailable for {route.route_label}: {blocked_reason}")
+                    print(
+                        f"Trip.com provider unavailable for {route.route_label}: {blocked_reason}"
+                    )
                     return []
                 offers = self._parse_network_payloads(payloads, route, url)
                 if not offers:
-                    self._save_debug(page, route, "No Trip.com flight offers could be parsed.")
+                    self._save_debug(
+                        page, route, "No Trip.com flight offers could be parsed."
+                    )
                 return offers[:10]
             except Exception as exc:
                 self._save_debug(page, route, f"Trip.com provider failed: {exc}")

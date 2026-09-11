@@ -10,7 +10,9 @@ class PriceStore:
         self.file_path = Path(file_path)
         self.file_path.parent.mkdir(parents=True, exist_ok=True)
         if not self.file_path.exists():
-            self.file_path.write_text(json.dumps({"routes": {}}, indent=2), encoding="utf-8")
+            self.file_path.write_text(
+                json.dumps({"routes": {}}, indent=2), encoding="utf-8"
+            )
 
     def _load(self) -> dict:
         try:
@@ -32,16 +34,21 @@ class PriceStore:
 
     def get_route(self, origin: str, destination: str, date: str) -> dict:
         data = self._load()
-        return data["routes"].get(self.route_key(origin, destination, date), {
-            "history": [],
-            "lowest_price": None,
-            "latest_price": None,
-        })
+        return data["routes"].get(
+            self.route_key(origin, destination, date),
+            {
+                "history": [],
+                "lowest_price": None,
+                "latest_price": None,
+            },
+        )
 
     def append_offer(self, route: dict, offer: dict) -> dict:
         data = self._load()
         key = self.route_key(route["origin"], route["destination"], route["date"])
-        route_data = data["routes"].setdefault(key, {"history": [], "lowest_price": None, "latest_price": None})
+        route_data = data["routes"].setdefault(
+            key, {"history": [], "lowest_price": None, "latest_price": None}
+        )
 
         entry = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -55,7 +62,9 @@ class PriceStore:
         route_data["latest_price"] = offer["price"]
 
         historical_prices = [item["price"] for item in route_data["history"]]
-        route_data["lowest_price"] = min(historical_prices) if historical_prices else None
+        route_data["lowest_price"] = (
+            min(historical_prices) if historical_prices else None
+        )
 
         data["routes"][key] = route_data
         self._save(data)

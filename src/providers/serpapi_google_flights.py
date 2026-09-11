@@ -63,7 +63,9 @@ class SerpApiGoogleFlightsProvider:
                     texts.append(str(extension))
         return "; ".join(texts) if texts else None
 
-    def _offer_from_itinerary(self, itinerary: dict[str, Any], route: RouteConfig) -> FlightOffer | None:
+    def _offer_from_itinerary(
+        self, itinerary: dict[str, Any], route: RouteConfig
+    ) -> FlightOffer | None:
         price = itinerary.get("price")
         flights = itinerary.get("flights") or []
         if not isinstance(price, (int, float)) or not flights:
@@ -116,7 +118,9 @@ class SerpApiGoogleFlightsProvider:
             if offer:
                 offers.append(offer)
 
-        return sorted(offers, key=lambda item: (item.price, item.stops, item.duration_minutes))
+        return sorted(
+            offers, key=lambda item: (item.price, item.stops, item.duration_minutes)
+        )
 
     def search(self, route: RouteConfig) -> list[FlightOffer]:
         if not self.api_key:
@@ -124,7 +128,9 @@ class SerpApiGoogleFlightsProvider:
             return []
 
         try:
-            response = requests.get(self.endpoint, params=self._params(route), timeout=self.timeout)
+            response = requests.get(
+                self.endpoint, params=self._params(route), timeout=self.timeout
+            )
             response.raise_for_status()
             data = response.json()
         except Exception as exc:

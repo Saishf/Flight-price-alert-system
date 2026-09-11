@@ -63,6 +63,38 @@
 			"isBackground": false,
 			"problemMatcher": [],
 			"group": "build"
+		},
+		{
+			"label": "Verify CI checks locally",
+			"type": "shell",
+			"command": "Set-Location 'C:/Users/Admin/Desktop/Fligght price tracker'; python -m pip install -r requirements.txt; python -m black --check src tests; pytest -q",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Format code and run tests with project path",
+			"type": "shell",
+			"command": "Set-Location 'C:/Users/Admin/Desktop/Fligght price tracker'; black src tests; $env:PYTHONPATH='.'; pytest -q",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Final CI validation",
+			"type": "shell",
+			"command": "Set-Location 'C:/Users/Admin/Desktop/Fligght price tracker'; $env:PYTHONPATH='.'; python -m black --check src tests; pytest -q",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "test"
+		},
+		{
+			"label": "Commit CI pipeline changes",
+			"type": "shell",
+			"command": "Set-Location 'C:/Users/Admin/Desktop/Fligght price tracker'; git add .; git commit -m 'Add CI checks and pytest config'; git push",
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

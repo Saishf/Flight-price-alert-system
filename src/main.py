@@ -37,7 +37,9 @@ def _format_alert(route: dict, decision: dict, best_offer: FlightOffer) -> str:
         direction = "drop" if delta < 0 else "rise"
         drop = f"Previous: ₹{decision['previous_price']:,}\n{direction.title()}: ₹{delta_text}"
 
-    url_line = best_offer.booking_url or "No direct booking URL available from this source."
+    url_line = (
+        best_offer.booking_url or "No direct booking URL available from this source."
+    )
     return (
         "✈️ FLIGHT PRICE ALERT\n\n"
         f"{route.route_label}\n"
@@ -64,7 +66,9 @@ def pick_best_offer(offers: list[FlightOffer]) -> FlightOffer:
     nonstop = [offer for offer in offers if offer.stops == 0]
     if nonstop:
         return sorted(nonstop, key=lambda item: (item.price, item.duration_minutes))[0]
-    return sorted(offers, key=lambda item: (item.stops, item.price, item.duration_minutes))[0]
+    return sorted(
+        offers, key=lambda item: (item.stops, item.price, item.duration_minutes)
+    )[0]
 
 
 def open_route_url(url: str) -> bool:
@@ -86,9 +90,19 @@ def open_route_url(url: str) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Flight Price Agent")
-    parser.add_argument("--demo", action="store_true", help="Use sample/demo ticket data instead of live providers")
-    parser.add_argument("--json", action="store_true", help="Print each route output as JSON")
-    parser.add_argument("--open", action="store_true", help="Open the route search page in the browser after each live result")
+    parser.add_argument(
+        "--demo",
+        action="store_true",
+        help="Use sample/demo ticket data instead of live providers",
+    )
+    parser.add_argument(
+        "--json", action="store_true", help="Print each route output as JSON"
+    )
+    parser.add_argument(
+        "--open",
+        action="store_true",
+        help="Open the route search page in the browser after each live result",
+    )
     args = parser.parse_args()
 
     load_dotenv(ROOT_DIR / ".env")
@@ -153,14 +167,18 @@ def main() -> int:
                 if opened:
                     print(f"Opened route page in browser: {best_offer.booking_url}")
                 else:
-                    print(f"Browser open request returned False for: {best_offer.booking_url}")
+                    print(
+                        f"Browser open request returned False for: {best_offer.booking_url}"
+                    )
             except Exception as exc:
                 print(f"Could not open route page automatically: {exc}")
 
         if args.json:
             print(json.dumps(route_record, indent=2, default=_json_default))
         else:
-            print(f"Route: {route.route_label} | Lowest: ₹{best_offer.price:,} | Status: {decision['reason']}")
+            print(
+                f"Route: {route.route_label} | Lowest: ₹{best_offer.price:,} | Status: {decision['reason']}"
+            )
 
     if alert_routes:
         combined_lines = ["✈️ FLIGHT PRICE ALERT\n"]
