@@ -10,7 +10,12 @@ from src.models import FlightOffer, RouteConfig
 
 
 class AmadeusProvider:
-    def __init__(self, client_id: str | None = None, client_secret: str | None = None, enable_live: bool = False):
+    def __init__(
+        self,
+        client_id: str | None = None,
+        client_secret: str | None = None,
+        enable_live: bool = False,
+    ):
         self.client_id = client_id or os.getenv("AMADEUS_CLIENT_ID")
         self.client_secret = client_secret or os.getenv("AMADEUS_CLIENT_SECRET")
         self.enable_live = enable_live and bool(self.client_id and self.client_secret)
@@ -24,7 +29,9 @@ class AmadeusProvider:
                 destination=route.destination,
                 date=route.date,
                 airline="IndiGo" if route.destination == "ISK" else "Air India Express",
-                flight_numbers=["6E 2032"] if route.destination == "ISK" else ["IX 819"],
+                flight_numbers=(
+                    ["6E 2032"] if route.destination == "ISK" else ["IX 819"]
+                ),
                 departure="14:00",
                 arrival="15:50",
                 stops=0,
@@ -85,11 +92,23 @@ class AmadeusProvider:
                     destination=route.destination,
                     date=route.date,
                     airline=first_segment.get("carrierCode", "Unknown"),
-                    flight_numbers=[segment.get("carrierCode", "") + " " + segment.get("number", "") for segment in segments],
+                    flight_numbers=[
+                        segment.get("carrierCode", "") + " " + segment.get("number", "")
+                        for segment in segments
+                    ],
                     departure=first_segment["departure"]["at"],
                     arrival=last_segment["arrival"]["at"],
                     stops=max(len(segments) - 1, 0),
-                    duration_minutes=int(itinerary["duration"].replace("PT", "").replace("H", "*").replace("M", "")) if "PT" in itinerary["duration"] else 0,
+                    duration_minutes=(
+                        int(
+                            itinerary["duration"]
+                            .replace("PT", "")
+                            .replace("H", "*")
+                            .replace("M", "")
+                        )
+                        if "PT" in itinerary["duration"]
+                        else 0
+                    ),
                     price=int(float(item["price"]["grandTotal"])),
                     currency=item["price"].get("currency", "INR"),
                     baggage=None,

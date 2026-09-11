@@ -5,8 +5,26 @@ from src.models import FlightOffer
 
 def test_pick_best_offer_prefers_nonstop_even_if_more_expensive():
     offers = [
-        FlightOffer(source="x", origin="BLR", destination="ISK", date="2026-11-07", airline="Airline A", stops=1, price=5000, duration_minutes=180),
-        FlightOffer(source="x", origin="BLR", destination="ISK", date="2026-11-07", airline="Airline B", stops=0, price=6200, duration_minutes=120),
+        FlightOffer(
+            source="x",
+            origin="BLR",
+            destination="ISK",
+            date="2026-11-07",
+            airline="Airline A",
+            stops=1,
+            price=5000,
+            duration_minutes=180,
+        ),
+        FlightOffer(
+            source="x",
+            origin="BLR",
+            destination="ISK",
+            date="2026-11-07",
+            airline="Airline B",
+            stops=0,
+            price=6200,
+            duration_minutes=120,
+        ),
     ]
 
     best = pick_best_offer(offers)

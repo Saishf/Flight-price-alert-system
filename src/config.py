@@ -7,7 +7,6 @@ import yaml
 
 from src.models import RouteConfig
 
-
 ROOT_DIR = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT_DIR / "config.yaml"
 
